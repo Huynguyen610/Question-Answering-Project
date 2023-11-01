@@ -6,6 +6,7 @@ from Question_Answering.utils.common import get_size
 from Question_Answering.entity import DataIngestionConfig
 from pathlib import Path
 
+
 class DataIngestion:
     def __init__(self, config: DataIngestionConfig):
         self.config = config
