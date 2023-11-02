@@ -1,5 +1,4 @@
 TrainingArguments:
-    evaluation_strategy: no
     save_strategy: epoch
     num_train_epochs: 3
     num_update_step_per_epoch: 8

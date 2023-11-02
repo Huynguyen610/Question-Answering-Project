@@ -19,21 +19,28 @@ class ModelTrainer:
     def train(self):
         train_dataset = load_from_disk(self.config.train_data_path)
         train_dataset.set_format("torch")
-
+        valid_dataset = load_from_disk(self.config.valid_data_path)
+        valid_dataset.set_format("torch")
         train_dataloader = DataLoader(
             train_dataset,
             shuffle=True,
             collate_fn=default_data_collator,
             batch_size=self.config.batch_size,
         )
+        valid_dataloader = DataLoader(
+            valid_dataset,
+            shuffle=True,
+            collate_fn=default_data_collator,
+            batch_size=self.config.batch_size,
+        )
 
+        accelerator = Accelerator()
         model = AutoModelForQuestionAnswering.from_pretrained(self.config.model_checkpoint)
         tokenizer = AutoTokenizer.from_pretrained(self.config.model_checkpoint)
-        optimizer = AdamW(model.parameters(), lr=2e-5)
-        accelerator = Accelerator(fp16=True)
-        model, optimizer, train_dataloader = accelerator.prepare(
-            model, optimizer, train_dataloader)
+        optimizer = AdamW(model.parameters(), lr=3e-5)
 
+        train_dataloader, eval_dataloader, model, optimizer = accelerator.prepare(
+            train_dataloader, valid_dataloader, model, optimizer)
         num_train_epochs = self.config.num_train_epochs
         num_update_steps_per_epoch = len(train_dataloader)
         num_training_steps = num_train_epochs * num_update_steps_per_epoch
@@ -44,12 +51,14 @@ class ModelTrainer:
             num_warmup_steps=self.config.num_warmup_steps,
             num_training_steps=num_training_steps,
         )
+
         progress_bar = tqdm(range(num_training_steps))
+
+        model.train()
 
         for epoch in range(num_train_epochs):
             # Training
-            model.train()
-            for step, batch in enumerate(train_dataloader):
+            for batch in train_dataloader:
                 outputs = model(**batch)
                 loss = outputs.loss
                 accelerator.backward(loss)

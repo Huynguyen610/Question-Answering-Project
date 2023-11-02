@@ -67,7 +67,6 @@ class ConfigurationManager:
             train_data_path=config.train_data_path,
             valid_data_path=config.valid_data_path,
             model_checkpoint=config.model_checkpoint,
-            evaluation_strategy=config.evaluation_strategy,
             save_strategy=config.save_strategy,
             num_train_epochs=config.num_train_epochs,
             num_update_step_per_epoch=config.num_update_step_per_epoch,

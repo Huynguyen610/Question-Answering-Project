@@ -31,7 +31,6 @@ class ModelTrainerConfig:
     train_data_path: Path
     valid_data_path: Path
     model_checkpoint: Path
-    evaluation_strategy: str
     save_strategy: str
     num_train_epochs: int
     num_update_step_per_epoch: int
