@@ -3,6 +3,7 @@ from Question_Answering.utils.common import read_yaml, create_directories
 from Question_Answering.entity import DataIngestionConfig
 from Question_Answering.entity import DataValidationConfig
 from Question_Answering.entity import DataTransformationConfig
+from Question_Answering.entity import ModelTrainerConfig
 
 
 class ConfigurationManager:
@@ -55,3 +56,23 @@ class ConfigurationManager:
             )
 
         return data_transformation_config
+
+    def get_model_trainer_config(self) -> ModelTrainerConfig:
+        config = self.config.model_trainer
+
+        create_directories([config.root_dir])
+
+        model_trainer_config = ModelTrainerConfig(
+            root_dir=config.root_dir,
+            train_data_path=config.train_data_path,
+            valid_data_path=config.valid_data_path,
+            model_checkpoint=config.model_checkpoint,
+            evaluation_strategy=config.evaluation_strategy,
+            save_strategy=config.save_strategy,
+            num_train_epochs=config.num_train_epochs,
+            num_update_step_per_epoch=config.num_update_step_per_epoch,
+            batch_size=config.batch_size,
+            num_warmup_steps=config.num_warmup_steps,
+            logging_steps=config.logging_steps
+        )
+        return model_trainer_config

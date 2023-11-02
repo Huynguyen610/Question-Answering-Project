@@ -23,3 +23,18 @@ class DataTransformationConfig:
     train_data_path: Path
     valid_data_path: Path
     tokenizer_name: Path
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    root_dir: Path
+    train_data_path: Path
+    valid_data_path: Path
+    model_checkpoint: Path
+    evaluation_strategy: str
+    save_strategy: str
+    num_train_epochs: int
+    num_update_step_per_epoch: int
+    batch_size: int
+    num_warmup_steps: int
+    logging_steps: int
