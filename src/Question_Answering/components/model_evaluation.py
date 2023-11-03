@@ -10,14 +10,16 @@ import numpy as np
 from accelerate import Accelerator
 from transformers import default_data_collator
 from torch.utils.data import DataLoader
-
+from transformers import BertConfig, BertModel
+from torch.optim import AdamW
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
         self.config = config
-        self.metric = evaluate.load(config.metric)
+
 
     def compute_metrics(self, start_logits, end_logits, features, examples):
+        metric = evaluate.load("squad")
         example_to_features = defaultdict(list)
         for idx, feature in enumerate(features):
             example_to_features[feature["example_id"]].append(idx)
@@ -72,31 +74,24 @@ class ModelEvaluation:
 
     def evaluate(self):
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
-        model = AutoModelForQuestionAnswering.from_pretrained(self.config.model_path).to(device)
+        tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
+        finetuned_config = BertConfig.from_json_file("artifacts/model_trainer/config.json")
+        model = BertModel.from_pretrained("artifacts/model_trainer/model.safetensors", config=finetuned_config).to(device)
 
-        raw_datasets_validation_split = load_from_disk("artifacts/ingestion/validation")
-        train_dataset = load_from_disk(self.config.train_data_path)
-        train_dataset.set_format("torch")
+        raw_datasets_validation_split = load_from_disk(self.config.raw_valid_data_path)
         valid_dataset = load_from_disk(self.config.valid_data_path)
+        valid_dataset = valid_dataset.remove_columns(["example_id", "offset_mapping"])
         valid_dataset.set_format("torch")
-        train_dataloader = DataLoader(
-            train_dataset,
-            shuffle=True,
-            collate_fn=default_data_collator,
-            batch_size=8,
-        )
+        accelerator = Accelerator()
+
         eval_dataloader = DataLoader(
             valid_dataset,
             shuffle=True,
             collate_fn=default_data_collator,
-            batch_size=8,
+            batch_size=8
         )
 
-        accelerator = Accelerator()
-        model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
-            model, optimizer, train_dataloader, eval_dataloader
-        )
+
         model.eval()
         start_logits = []
         end_logits = []
