@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef6cf3af-10c0-45ad-a85e-68a080420f50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Question_Answering/components/model_evaluation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Question_Answering/pipeline/stage_05_model_evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Question_Answering/pipeline/prediction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/params.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/params.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/04_model_trainer.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/research/04_model_trainer.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/research/Untitled.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/config/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/config/configuration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/entity/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/entity/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/research/05_model_evaluation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/research/05_model_evaluation.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
