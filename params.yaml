@@ -9,3 +9,7 @@ TrainingArguments:
     eval_steps:
     save_steps:
     gradient_accumulation_steps:
+
+
+EvaluationArguments:
+    metric: squad

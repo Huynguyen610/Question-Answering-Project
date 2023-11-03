@@ -4,7 +4,7 @@ from Question_Answering.entity import DataIngestionConfig
 from Question_Answering.entity import DataValidationConfig
 from Question_Answering.entity import DataTransformationConfig
 from Question_Answering.entity import ModelTrainerConfig
-
+from Question_Answering.entity import ModelEvaluationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -75,3 +75,21 @@ class ConfigurationManager:
             logging_steps=params.logging_steps
         )
         return model_trainer_config
+
+    def get_model_evaluation_config(self) -> ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        params = self.params.EvaluationArguments
+
+        create_directories([config.root_dir])
+
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            raw_valid_data_path=config.raw_valid_data_path,
+            train_data_path=config.train_data_path,
+            valid_data_path=config.valid_data_path,
+            model_path=config.model_path,
+            tokenizer_path=config.tokenizer_path,
+            metric=params.metric,
+            metric_file_name=config.metric_file_name
+        )
+        return model_evaluation_config

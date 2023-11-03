@@ -37,3 +37,15 @@ class ModelTrainerConfig:
     batch_size: int
     num_warmup_steps: int
     logging_steps: int
+
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    raw_valid_data_path: Path
+    train_data_path: Path
+    valid_data_path: Path
+    model_path: Path
+    tokenizer_path: Path
+    metric: str
+    metric_file_name: Path
