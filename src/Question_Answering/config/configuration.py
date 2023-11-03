@@ -59,7 +59,7 @@ class ConfigurationManager:
 
     def get_model_trainer_config(self) -> ModelTrainerConfig:
         config = self.config.model_trainer
-
+        params = self.params.TrainingArguments
         create_directories([config.root_dir])
 
         model_trainer_config = ModelTrainerConfig(
@@ -67,11 +67,11 @@ class ConfigurationManager:
             train_data_path=config.train_data_path,
             valid_data_path=config.valid_data_path,
             model_checkpoint=config.model_checkpoint,
-            save_strategy=config.save_strategy,
-            num_train_epochs=config.num_train_epochs,
-            num_update_step_per_epoch=config.num_update_step_per_epoch,
-            batch_size=config.batch_size,
-            num_warmup_steps=config.num_warmup_steps,
-            logging_steps=config.logging_steps
+            save_strategy=params.save_strategy,
+            num_train_epochs=params.num_train_epochs,
+            num_update_step_per_epoch=params.num_update_step_per_epoch,
+            batch_size=params.batch_size,
+            num_warmup_steps=params.num_warmup_steps,
+            logging_steps=params.logging_steps
         )
         return model_trainer_config
