@@ -1,39 +1,39 @@
-from fastapi import FastAPI
-import uvicorn
-import sys
 import os
-from fastapi.templating import Jinja2Templates
-from starlette.responses import RedirectResponse
-from fastapi.responses import Response
+import chainlit as cl
+from langchain.llms import CTransformers
+from langchain import PromptTemplate, LLMChain
 from Question_Answering.pipeline.prediction import PredictionPipeline
 
 
-text:str = "What is Question Answering?"
+local_llm = PredictionPipeline()
 
-app = FastAPI()
+config = {
+    "max_new_tokens": 1024,
+    "repetition_penalty": 1.1,
+    "temperature": 0.5,
+    "top_k": 50,
+    "top_p": 0.9,
+    "stream": True,
+    "threads": int(os.cpu_count() / 2)
+}
 
-@app.get("/", tags=["authentication"])
-async def index():
-    return RedirectResponse(url="/docs")
+template = """Question: {question}
+
+Answer: Please refer to factual information and don't make up fictional data/information.
+"""
+
+@cl.on_chat_start
+def main():
+    prompt = PromptTemplate(template=template, input_variables=['question'])
+    llm_chain = LLMChain(prompt=prompt, llm=local_llm, verbose=True)
+    cl.user_session.set("llm_chain", llm_chain)
 
 
-@app.get("/train")
-async def training():
-    try:
-        os.system("python main.py")
-        return Response("Training successful !!")
-    except Exception as e:
-        return Response(f"Error Occurred! {e}")
+@cl.on_message
+async def main(message: str):
+    llm_chain = cl.user_session.get("llm_chain")
+    res = await llm_chain.acall(message, callbacks=[cl.AsyncLangchainCallbackHandler()])
+    await cl.Message(content=res["text"]).send()
 
 
-@app.post("/predict"):
-async def predict_route(text):
-    try:
-        obj = PredictionPipeline()
-        text = obj.predict(text)
-        return text
-    except Exception as e:
-        raise e
-
-if __name__=="__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+# chainlit run app.py

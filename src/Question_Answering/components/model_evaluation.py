@@ -74,9 +74,9 @@ class ModelEvaluation:
 
     def evaluate(self):
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
-        finetuned_config = BertConfig.from_json_file("artifacts/model_trainer/config.json")
-        model = BertModel.from_pretrained("artifacts/model_trainer/model.safetensors", config=finetuned_config).to(device)
+        tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
+        finetuned_config = BertConfig.from_json_file(self.config.model_config_path)
+        model = BertModel.from_pretrained(self.config.model_path, config=finetuned_config).to(device)
 
         raw_datasets_validation_split = load_from_disk(self.config.raw_valid_data_path)
         valid_dataset = load_from_disk(self.config.valid_data_path)
@@ -108,7 +108,6 @@ class ModelEvaluation:
         start_logits = start_logits[: len(valid_dataset)]
         end_logits = end_logits[: len(valid_dataset)]
 
-        metrics = self.compute_metrics(
-            start_logits, end_logits, valid_dataset, raw_datasets_validation_split
-        )
-        print(metrics)
+
+        metric = evaluate.load("squad")
+        print(metric.compute(start_logits, end_logits, valid_dataset, raw_datasets_validation_split))

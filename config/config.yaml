@@ -33,6 +33,7 @@ model_evaluation:
   raw_valid_data_path: artifacts/data_ingestion/validation
   train_data_path: artifacts/data_transformation/train_dataset
   valid_data_path: artifacts/data_transformation/validation_dataset
-  model_path: artifacts/model_trainer/Question-Answering-model
-  tokenizer_path: artifacts/model_trainer/tokenizer
+  model_path: artifacts/model_trainer
+  tokenizer_path: artifacts/model_trainer/tokenizer_config.json
   metric_file_name: artifacts/model_evaluation/metrics.csv
+

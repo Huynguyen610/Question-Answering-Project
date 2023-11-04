@@ -47,5 +47,4 @@ class ModelEvaluationConfig:
     valid_data_path: Path
     model_path: Path
     tokenizer_path: Path
-    metric: str
     metric_file_name: Path
