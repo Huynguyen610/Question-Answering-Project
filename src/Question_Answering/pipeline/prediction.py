@@ -7,7 +7,8 @@ class PredictionPipeline:
     def __init__(self):
         self.config = ConfigurationManager().get_model_evaluation_config()
 
-    def predict(self, question, context):
+    def predict(self, context, question):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         tokenizer = AutoTokenizer.from_pretrained("bert-base-cased")
         model = AutoModelForQuestionAnswering.from_pretrained(self.config.model_path).to(device)
         inputs = tokenizer(question, context, return_tensors="pt")

@@ -1,8 +1,6 @@
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer
-from datasets import load_dataset, load_from_disk, load_metric
+from datasets import load_from_disk
 import torch
-import pandas as pd
-from tqdm.auto import tqdm
 import evaluate
 from Question_Answering.entity import ModelEvaluationConfig
 from collections import defaultdict
@@ -10,8 +8,7 @@ import numpy as np
 from accelerate import Accelerator
 from transformers import default_data_collator
 from torch.utils.data import DataLoader
-from transformers import BertConfig, BertModel
-from torch.optim import AdamW
+
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
@@ -19,6 +16,7 @@ class ModelEvaluation:
 
 
     def compute_metrics(self, start_logits, end_logits, features, examples):
+        # a function to compute metrics after we have finished our predict
         metric = evaluate.load("squad")
         example_to_features = defaultdict(list)
         for idx, feature in enumerate(features):
@@ -26,7 +24,6 @@ class ModelEvaluation:
 
         n_best = 20
         max_answer_length = 30
-        predicted_answers = []
         predicted_answers = []
 
         for example in tqdm(examples):
@@ -74,23 +71,21 @@ class ModelEvaluation:
 
     def evaluate(self):
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        tokenizer = AutoTokenizer.from_pretrained(self.config.tokenizer_path)
-        finetuned_config = BertConfig.from_json_file(self.config.model_config_path)
-        model = BertModel.from_pretrained(self.config.model_path, config=finetuned_config).to(device)
+        tokenizer = AutoTokenizer.from_pretrained(self.config.model_checkpoint)
+        model = AutoModelForQuestionAnswering.from_pretrained(self.config.model_path).to(device)
 
         raw_datasets_validation_split = load_from_disk(self.config.raw_valid_data_path)
         valid_dataset = load_from_disk(self.config.valid_data_path)
-        valid_dataset = valid_dataset.remove_columns(["example_id", "offset_mapping"])
+        valid_dataset_for_model = valid_dataset.remove_columns(["example_id", "offset_mapping"])
         valid_dataset.set_format("torch")
         accelerator = Accelerator()
 
         eval_dataloader = DataLoader(
-            valid_dataset,
+            valid_dataset_for_model,
             shuffle=True,
             collate_fn=default_data_collator,
             batch_size=8
         )
-
 
         model.eval()
         start_logits = []
@@ -107,7 +102,8 @@ class ModelEvaluation:
         end_logits = np.concatenate(end_logits)
         start_logits = start_logits[: len(valid_dataset)]
         end_logits = end_logits[: len(valid_dataset)]
-
-
-        metric = evaluate.load("squad")
-        print(metric.compute(start_logits, end_logits, valid_dataset, raw_datasets_validation_split))
+        metrics = self.compute_metrics(
+            start_logits, end_logits, valid_dataset, raw_datasets_validation_split)
+        print(metrics)
+        with open(self.config.metric_file_name, 'w') as f:
+            f.write(f"{metrics}")

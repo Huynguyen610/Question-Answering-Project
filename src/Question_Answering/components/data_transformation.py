@@ -1,8 +1,6 @@
 import os
-from Question_Answering.logging import logger
 from transformers import AutoTokenizer
-from datasets import load_dataset, load_from_disk
-from pathlib import Path
+from datasets import load_from_disk
 from Question_Answering.entity import DataTransformationConfig
 from Question_Answering.constants import *
 

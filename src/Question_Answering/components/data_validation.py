@@ -1,5 +1,4 @@
 import os
-from Question_Answering.logging import logger
 from Question_Answering.entity import DataValidationConfig
 
 

@@ -1,9 +1,6 @@
-from transformers import TrainingArguments, Trainer
 from transformers import default_data_collator
 from transformers import AutoModelForQuestionAnswering, AutoTokenizer
-from datasets import load_dataset, load_from_disk
-import torch
-import os
+from datasets import load_from_disk
 from Question_Answering.entity import ModelTrainerConfig
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
