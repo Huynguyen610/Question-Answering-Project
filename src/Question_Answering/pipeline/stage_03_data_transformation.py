@@ -14,7 +14,7 @@ class DataTransformationTrainingPipeline:
         data_transformation.processing()
 
 
-if __name__ == "__main":
+if __name__ == "__main__":
     STAGE_NAME = "Data Transformation stage"
 
     try:

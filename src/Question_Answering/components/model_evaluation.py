@@ -8,12 +8,12 @@ import numpy as np
 from accelerate import Accelerator
 from transformers import default_data_collator
 from torch.utils.data import DataLoader
+from Question_Answering.logging import logger
 
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):
         self.config = config
-
 
     def compute_metrics(self, start_logits, end_logits, features, examples):
         # a function to compute metrics after we have finished our predict

@@ -6,6 +6,7 @@ from Question_Answering.entity import DataTransformationConfig
 from Question_Answering.entity import ModelTrainerConfig
 from Question_Answering.entity import ModelEvaluationConfig
 
+
 class ConfigurationManager:
     def __init__(
             self,
