@@ -5,24 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e74a9436-9f3f-4ddb-824c-fff25130b97c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.dvc/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.dvc/config" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.dvcignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dvc.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/components/data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/components/data_transformation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/components/data_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/components/data_validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/components/model_evaluation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/components/model_evaluation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/components/model_trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/components/model_trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/config/configuration.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/config/configuration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Question_Answering/pipeline/stage_03_data_transformation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Question_Answering/pipeline/stage_03_data_transformation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -42,7 +37,8 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev"
+    "git-widget-placeholder": "dev",
+    "last_opened_file_path": "E:/github/Question-Answering-Project"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
