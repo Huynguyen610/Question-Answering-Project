@@ -38,7 +38,7 @@ https://github.com/Huynguyen610/Question-Answering-Project
 ### STEP 01- Create a conda environment after opening the repository
 
 ```bash
-conda create -n summary python=3.8 -y
+conda create -n summary python=3.9 -y
 ```
 
 ```bash
