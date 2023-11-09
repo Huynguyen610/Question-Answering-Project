@@ -1,6 +1,6 @@
 TrainingArguments:
     save_strategy: epoch
-    num_train_epochs: 1
+    num_train_epochs: 3
     num_update_step_per_epoch: 8
     batch_size: 8
     push_to_hub: False

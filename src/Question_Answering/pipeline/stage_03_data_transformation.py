@@ -12,15 +12,3 @@ class DataTransformationTrainingPipeline:
         data_transformation_config = config.get_data_transformation_config()
         data_transformation = DataTransformation(config=data_transformation_config)
         data_transformation.processing()
-
-
-if __name__ == "__main__":
-    STAGE_NAME = "Data Transformation stage"
-
-    try:
-        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
-        data_transformation_obj = DataTransformationTrainingPipeline()
-        data_transformation_obj.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-    except Exception as e:
-        raise e
