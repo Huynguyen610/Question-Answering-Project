@@ -1,5 +1,6 @@
 import os
 from Question_Answering.entity import DataValidationConfig
+from Question_Answering.logging import logger
 
 
 class DataValidation:

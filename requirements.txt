@@ -1,5 +1,7 @@
 transformers
 transformers[sentencepiece]
+dvc
+docker
 datasets
 sacrebleu
 py7zr
@@ -21,4 +23,5 @@ evaluate
 langchain
 chainlit
 numpy
+setuptools
 -e .

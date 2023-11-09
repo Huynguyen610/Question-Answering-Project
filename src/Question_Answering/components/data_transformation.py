@@ -3,6 +3,7 @@ from transformers import AutoTokenizer
 from datasets import load_from_disk
 from Question_Answering.entity import DataTransformationConfig
 from Question_Answering.constants import *
+from Question_Answering.logging import logger
 
 
 class DataTransformation:

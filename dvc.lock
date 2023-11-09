@@ -1,0 +1,82 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python main.py --stage "Data Ingestion stage"
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: 375b86568bb8deeb768b3dabc1585ef0
+      size: 1325
+    - path: src/Question_Answering/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: fc2d3b78f20821b561db56340e34aba3
+      size: 559
+    outs:
+    - path: artifacts/data_ingestion/train
+      hash: md5
+      md5: 4dfc5ef0a227d9bfacc4bedaf1b31336.dir
+      size: 79408073
+      nfiles: 3
+    - path: artifacts/data_ingestion/validation
+      hash: md5
+      md5: 732f7bce3297c29d4e9bb0730a76aed6.dir
+      size: 10483902
+      nfiles: 3
+  data_validation:
+    cmd: python main.py --stage "Data Validation stage"
+    deps:
+    - path: artifacts/data_ingestion/train
+      hash: md5
+      md5: 4dfc5ef0a227d9bfacc4bedaf1b31336.dir
+      size: 79408073
+      nfiles: 3
+    - path: artifacts/data_ingestion/validation
+      hash: md5
+      md5: 732f7bce3297c29d4e9bb0730a76aed6.dir
+      size: 10483902
+      nfiles: 3
+    - path: config/config.yaml
+      hash: md5
+      md5: 375b86568bb8deeb768b3dabc1585ef0
+      size: 1325
+    - path: src/Question_Answering/pipeline/stage_02_data_validation.py
+      hash: md5
+      md5: ff7641f3a7efe60a2d90e2068d450182
+      size: 536
+    outs:
+    - path: artifacts/data_validation/status.txt
+      hash: md5
+      md5: 86e6a2f694c57a675b3e2da6b95ff9ba
+      size: 23
+  data_transformation:
+    cmd: python main.py --stage "Data Transformation stage"
+    deps:
+    - path: artifacts/data_ingestion/train
+      hash: md5
+      md5: d62cd94903684b68c9dff95ab90b933c.dir
+      size: 286408265
+      nfiles: 4
+    - path: artifacts/data_ingestion/validation
+      hash: md5
+      md5: da49ea825db68df46d5a6862501843a0.dir
+      size: 81601654
+      nfiles: 4
+    - path: config/config.yaml
+      hash: md5
+      md5: 375b86568bb8deeb768b3dabc1585ef0
+      size: 1325
+    - path: src/Question_Answering/pipeline/stage_03_data_transformation.py
+      hash: md5
+      md5: cf7557f4d8c4261bae17c85bc531edac
+      size: 558
+    outs:
+    - path: artifacts/data_transformation/train_dataset
+      hash: md5
+      md5: 099116f997cf777d31e76ed11c3c6914.dir
+      size: 206964517
+      nfiles: 3
+    - path: artifacts/data_transformation/validation_dataset
+      hash: md5
+      md5: 59dae7084af52d73436e7823234f1268.dir
+      size: 71114839
+      nfiles: 3

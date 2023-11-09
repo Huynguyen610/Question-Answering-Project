@@ -7,6 +7,7 @@ from torch.optim import AdamW
 from accelerate import Accelerator
 from transformers import get_scheduler
 from tqdm.auto import tqdm
+from Question_Answering.logging import logger
 
 
 class ModelTrainer:

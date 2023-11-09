@@ -1,0 +1,52 @@
+stages:
+  data_ingestion:
+    cmd: python main.py --stage "Data Ingestion stage"
+    deps:
+      - src/Question_Answering/pipeline/stage_01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion/train
+      - artifacts/data_ingestion/validation
+
+  data_validation:
+    cmd: python main.py --stage "Data Validation stage"
+    deps:
+      - src/Question_Answering/pipeline/stage_02_data_validation.py
+      - artifacts/data_ingestion/train
+      - artifacts/data_ingestion/validation
+      - config/config.yaml
+    outs:
+      - artifacts/data_validation/status.txt
+
+  data_transformation:
+    cmd: python main.py --stage "Data Transformation stage"
+    deps:
+      - src/Question_Answering/pipeline/stage_03_data_transformation.py
+      - artifacts/data_ingestion/train
+      - artifacts/data_ingestion/validation
+      - config/config.yaml
+    outs:
+      - artifacts/data_transformation/train_dataset
+      - artifacts/data_transformation/validation_dataset
+
+  model_trainer:
+    cmd: python main.py --stage "Model Trainer stage"
+    deps:
+      - src/Question_Answering/pipeline/stage_04_model_trainer.py
+      - artifacts/data_transformation/train_dataset
+      - artifacts/data_transformation/validation_dataset
+      - config/config.yaml
+      - params.yaml
+    outs:
+      - artifacts/model_trainer
+
+  model_evaluation:
+    cmd: python main.py --stage "Model Evaluation stage"
+    deps:
+      - config/config.yaml
+      - src/Question_Answering/pipeline/stage_05_model_evaluation.py
+      - artifacts/data_ingestion/validation
+      - artifacts/data_transformation/validation_dataset
+      - artifacts/model_trainer
+    outs:
+      - artifacts/model_evaluation/metrics.txt
