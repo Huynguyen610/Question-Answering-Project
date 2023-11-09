@@ -5,25 +5,25 @@ This is a simple Extractive Question-Answering Chatbot. This involves posing que
 I finetuned a Bert-base model on Squad Dataset. You can find it here in [my Github:](https://github.com/Huynguyen610/Squad-Dataset)
 
 ## End to End Process
-  1. Setup a Github Repository for the project  
+1. Setup a Github Repository for the project  
     
-  2. Create template structure   
+2. Create template structure   
     
-  3. Project setup & Requirements installation  
+3. Project setup & Requirements installation  
     
-  4. Setup my logging, exception and utils Modules  
+4. Setup my logging, exception and utils Modules  
     
-  5. Experiment with notebooks  
+5. Experiment with notebooks  
     
-  6. Create a full pipeline including: Data Ingestion, Data Validation, Data Transformation, Model Training and Model Evaluation  
+6. Create a full pipeline including: Data Ingestion, Data Validation, Data Transformation, Model Training and Model Evaluation  
    
-  7. Manage my Pipeline with the help of DVC package(MLOps tool) for Pipeline tracking & implementation  
+7. Manage my Pipeline with the help of DVC package(MLOps tool) for Pipeline tracking & implementation  
    
-  8. Create a Prediction pipeline and User App Interface with Chainlit - an open-source Python package that makes it incredibly fast to build Chat GPT like applications  
+8. Create a Prediction pipeline and User App Interface with Chainlit - an open-source Python package that makes it incredibly fast to build Chat GPT like applications  
     
-  9. Dockerize my application  
+9. Dockerize my application  
    
-  10. Deploy my application on AWS with CI/CD using Github Actions  
+10. Deploy my application on AWS with CI/CD using Github Actions  
 
 
 # How to run?
