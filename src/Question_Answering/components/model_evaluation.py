@@ -9,7 +9,7 @@ from accelerate import Accelerator
 from transformers import default_data_collator
 from torch.utils.data import DataLoader
 from Question_Answering.logging import logger
-
+from tqdm.auto import tqdm
 
 class ModelEvaluation:
     def __init__(self, config: ModelEvaluationConfig):

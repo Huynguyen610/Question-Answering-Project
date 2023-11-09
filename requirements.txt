@@ -1,6 +1,7 @@
 transformers
 transformers[sentencepiece]
 dvc
+docker
 datasets
 sacrebleu
 py7zr
