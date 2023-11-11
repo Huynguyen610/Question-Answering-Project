@@ -3,8 +3,8 @@ import chainlit as cl
 from chainlit import Text
 from Question_Answering.pipeline.prediction import PredictionPipeline
 
-
 # chainlit run app.py -w to run
+
 
 def make_prediction(context, question):
     prediction = PredictionPipeline()
@@ -17,7 +17,7 @@ async def start():
     res = await cl.AskUserMessage(content="What is your name?", timeout=30).send()
     if res:
         await cl.Message(
-            content=f"Hi {res['content']}.\nChainlit installation is working!\nPlease type \'next\' to continue"
+            content=f"Hi {res['content']}.\nI am an Extractive Question-Answering Bot!\nPlease type \'next\' to continue"
         ).send()
 
 
