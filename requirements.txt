@@ -15,5 +15,4 @@ evaluate
 chainlit
 numpy
 setuptools
-gunicorn
 -e .
