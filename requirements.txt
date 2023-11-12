@@ -1,7 +1,6 @@
 transformers
 transformers[sentencepiece]
 dvc
-docker
 datasets
 sacrebleu
 py7zr
@@ -20,7 +19,6 @@ jinja2==3.1.2
 wget
 accelerate
 evaluate
-langchain
 chainlit
 numpy
 setuptools
