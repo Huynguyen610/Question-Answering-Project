@@ -2,7 +2,7 @@ import os
 import chainlit as cl
 from chainlit import Text
 from Question_Answering.pipeline.prediction import PredictionPipeline
-
+import uvicorn
 # chainlit run app.py -w to run
 
 

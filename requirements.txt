@@ -1,19 +1,8 @@
-transformers
-dvc
-datasets
-sacrebleu
-py7zr
-tqdm
+transformer
 PyYAML
 torch
-notebook
 python-box==6.0.2
 ensure==1.0.2
-wget
-accelerate
-evaluate
 chainlit
-numpy
-setuptools
 gunicorn
 -e .
