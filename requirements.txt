@@ -1,4 +1,4 @@
-transformer
+transformer==4.35.0
 PyYAML
 torch
 python-box==6.0.2
