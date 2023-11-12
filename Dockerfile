@@ -1,13 +1,6 @@
-FROM python:3.10-slim-buster
-
-RUN apt update -y && apt install awscli -y
-WORKDIR /app
-
+FROM python:3.9
 COPY . /app
-
+WORKDIR /app
 RUN pip install -r requirements.txt
-RUN pip install --upgrade accelerate
-RUN pip uninstall -y transformers accelerate
-RUN pip install transformers accelerate
-
-CMD ["python3", "app.py"]
+EXPOSE $PORT
+CMD gunicorn --workers=4 --bind 0.0.0.0:$PORT app:cl
