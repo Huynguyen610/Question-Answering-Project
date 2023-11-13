@@ -2,9 +2,14 @@
 ## Description: 
 This is a simple Extractive Question-Answering Chatbot. This involves posing questions about a document and identifying the answers as spans of text in the document itself. You provide it a context and a question, it will response you with an answer.  
   
-I finetuned a Bert-base model on Squad Dataset. You can find it here in [my Github:](https://github.com/Huynguyen610/Squad-Dataset)
+I finetuned a Bert-base model on Squad Dataset. You can find the dataset here in [my Github:](https://github.com/Huynguyen610/Squad-Dataset)
+
+And this is my sample bot that I've deployed on Streamlit: [My sample Bot](https://extractive-app-bot-fxajpxvw6lqqjeycie4xrq.streamlit.app/)
+
+<br></br>
 
 ## End to End Process
+<br></br>
 1. Setup a Github Repository for the project  
     
 2. Create template structure   
@@ -19,45 +24,64 @@ I finetuned a Bert-base model on Squad Dataset. You can find it here in [my Gith
    
 7. Manage my Pipeline with the help of DVC package(MLOps tool) for Pipeline tracking & implementation  
    
-8. Create a Prediction pipeline and User App Interface with Chainlit - an open-source Python package that makes it incredibly fast to build Chat GPT like applications  
+8. Create a Prediction pipeline and User App Interface with Streamlit - an open-source Python package that makes it incredibly fast to build Chat GPT like applications  
     
-9. Dockerize my application  
-   
-10. Deploy my application on AWS with CI/CD using Github Actions  
+9. Deploy it on [Streamlit](https://share.streamlit.io/)
+<br></br>
 
 
-# How to run?
-### STEPS:
+(With limited resources, but for deployment illustrative purpose I upload my model on [huggingface hub](https://huggingface.co/huynguyen61098/Bert-Base-Cased-Squad-Extractive-QA), and call the model directly from it)
+<br></br>
 
-Clone the repository
+# How to run the app in your local?
+<br></br>
 
-```bash
-https://github.com/Huynguyen610/Question-Answering-Project
-```
+### STEPS 01:
 
-### STEP 01- Create a conda environment after opening the repository
+Clone the repository using git cmd
 
 ```bash
-conda create -n summary python=3.9 -y
+git clone https://github.com/Huynguyen610/Question-Answering-Project.git
+```
+<br></br>
+
+### STEP 02- Create a conda environment after opening the repository
+
+```bash
+conda create -n qa_project python=3.9 -y
 ```
 
 ```bash
-conda activate summary
+conda activate qa_project
 ```
+<br></br>
 
 
-### STEP 02- install the requirements
+### STEP 03- install the requirements
 ```bash
 pip install -r requirements.txt
 ```
+<br></br>
 
 
+### STEP 04 - initial your dvc in terminal:
 ```bash
-# Finally run the following command
-python app.py
+dvc init
+```
+<br></br>
+
+
+### STEP 04 - reproduce your artifacts
+Now, run this command to automate the pipeline (data ingestion, data validation, data transformation, model training and evaluation). It'll execute the dvc.yaml file:
+```bash
+dvc repro
+```
+<br></br>
+
+
+### STEP 05 - Finally run the following command to test it on your local host
+```bash
+streamlit run app.py
 ```
 
-Now,
-```bash
-open up you local host and port
-```
+
