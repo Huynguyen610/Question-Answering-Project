@@ -81,7 +81,7 @@ dvc repro
 
 ### STEP 05 - Finally run the following command to test it on your local host
 ```bash
-streamlit run app.py
+chainlit run app.py -w
 ```
 
 
